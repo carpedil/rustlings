@@ -3,7 +3,8 @@
 // Execute `rustlings hint functions1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// call_me 定义
+fn call_me() {}
 
 fn main() {
     call_me();
