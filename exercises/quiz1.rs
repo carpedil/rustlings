@@ -15,7 +15,7 @@
 
 
 // Put your function here!
-fn calculate_price_of_apples (qty :i32) {
+fn calculate_price_of_apples (qty :i32) -> i32 {
     if qty > 40 {
         // 此处的return不能省略, 结尾的分号可以省略
         return qty * 1;
