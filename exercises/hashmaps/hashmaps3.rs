@@ -14,11 +14,11 @@
 // Execute `rustlings hint hashmaps3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 use std::collections::HashMap;
 
 // A structure to store the goal details of a team.
+#[derive(Debug)]
 struct Team {
     goals_scored: u8,
     goals_conceded: u8,
@@ -27,6 +27,7 @@ struct Team {
 fn build_scores_table(results: String) -> HashMap<String, Team> {
     // The name of the team is the key and its associated struct is the value.
     let mut scores: HashMap<String, Team> = HashMap::new();
+    let mut tmp_socres: HashMap<String, Team> = HashMap::new();
 
     for r in results.lines() {
         let v: Vec<&str> = r.split(',').collect();
@@ -39,14 +40,29 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // will be the number of goals conceded from team_2, and similarly
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.
+
+        let team_1 = scores.entry(team_1_name.clone()).or_insert(Team { goals_scored: 0, goals_conceded: 0 });
+        team_1.goals_scored += team_1_score;
+        team_1.goals_conceded += team_2_score;
+        {
+            let team_2 = scores.entry(team_2_name.clone()).or_insert(Team { goals_scored: 0, goals_conceded: 0 });
+            team_2.goals_scored += team_2_score;
+            team_2.goals_conceded += team_1_score;
+        }
     }
+ 
     scores
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-
+    /// England:4 + 1 | 2 + 2
+    /// France: 2 + 3 | 1
+    /// Italy: 1 | 3
+    /// Poland: 2 | 0
+    /// Spain 0 | 2
+    /// Germany: 2 | 1
     fn get_results() -> String {
         let results = "".to_string()
             + "England,France,4,2\n"
