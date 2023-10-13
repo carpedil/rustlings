@@ -13,10 +13,15 @@
 //
 // No hints this time ;)
 
-// I AM NOT DONE
 
 // Put your function here!
-// fn calculate_price_of_apples {
+fn calculate_price_of_apples (qty :i32) {
+    if qty > 40 {
+        // 此处的return不能省略, 结尾的分号可以省略
+        return qty * 1;
+    }
+    qty * 2
+}
 
 // Don't modify this function!
 #[test]
